@@ -1,0 +1,7 @@
+#ifndef COUNT_MODULE_H_INCLUDED
+#define COUNT_MODULE_H_INCLUDED
+
+void COUNT_INIT(int N);
+void COUNT_UPDATE(void);
+
+#endif // COUNT_MODULE_H_INCLUDED

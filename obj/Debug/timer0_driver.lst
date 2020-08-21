@@ -1,0 +1,1061 @@
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE  1
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+                      00001 ;--------------------------------------------------------
+                      00002 ; File Created by SDCC : free open source ANSI-C Compiler
+                      00003 ; Version 4.0.0 #11528 (MINGW64)
+                      00004 ;--------------------------------------------------------
+                      00005 ; PIC port for the 14-bit core
+                      00006 ;--------------------------------------------------------
+                      00007         .file   "timer0_driver.c"
+                      00008         list    p=16f877a
+                      00009         radix dec
+                      00010         include "p16f877a.inc"
+                      00001         LIST
+                      00002 
+                      00003 ;==========================================================================
+                      00004 ; Build date : Oct 21 2015
+                      00005 ;  MPASM PIC16F877A processor include
+                      00006 ; 
+                      00007 ;  (c) Copyright 1999-2015 Microchip Technology, All rights reserved
+                      00008 ;==========================================================================
+                      00009 
+                      00567         LIST
+                      00011 ;--------------------------------------------------------
+                      00012 ; external declarations
+                      00013 ;--------------------------------------------------------
+  0000                00014         extern  _PB_DRIVER_UPDATE
+  0000                00015         extern  _SSD_UPDATE
+  0000                00016         extern  _COUNT_UPDATE
+  0000                00017         extern  _OPTION_REGbits
+  0000                00018         extern  _INTCONbits
+                      00019 
+  0000                00020         extern PSAVE
+  0000                00021         extern SSAVE
+  0000                00022         extern WSAVE
+  0000                00023         extern STK12
+  0000                00024         extern STK11
+  0000                00025         extern STK10
+  0000                00026         extern STK09
+  0000                00027         extern STK08
+  0000                00028         extern STK07
+  0000                00029         extern STK06
+  0000                00030         extern STK05
+  0000                00031         extern STK04
+  0000                00032         extern STK03
+  0000                00033         extern STK02
+  0000                00034         extern STK01
+  0000                00035         extern STK00
+                      00036 ;--------------------------------------------------------
+                      00037 ; global declarations
+                      00038 ;--------------------------------------------------------
+  0000                00039         global  _timer0_driver_init
+  0000                00040         global  _timer0_driver_update
+  0000                00041         global  _timer0_driver_start
+                      00042 
+                      00043 ;--------------------------------------------------------
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE  2
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+                      00044 ; global definitions
+                      00045 ;--------------------------------------------------------
+                      00046 ;--------------------------------------------------------
+                      00047 ; absolute symbol definitions
+                      00048 ;--------------------------------------------------------
+                      00049 ;--------------------------------------------------------
+                      00050 ; compiler-defined variables
+                      00051 ;--------------------------------------------------------
+                      00052 UDL_timer0_driver_0     udata
+0000                  00053 ___sdcc_saved_fsr       res     1
+                      00054 ;--------------------------------------------------------
+                      00055 ; initialized data
+                      00056 ;--------------------------------------------------------
+                      00057 
+                      00058 IDD_timer0_driver_0     idata
+                      00059 ; Ltimer0_driver_timer0_driver_update_counter_65536_18 == .
+0000                  00060 _timer0_driver_update_counter_65536_18
+0000   00 00          00061         db      0x00, 0x00      ;  0
+                      00062 
+                      00063 ;--------------------------------------------------------
+                      00064 ; initialized absolute data
+                      00065 ;--------------------------------------------------------
+                      00066 ;--------------------------------------------------------
+                      00067 ; overlayable items in internal ram 
+                      00068 ;--------------------------------------------------------
+                      00069 ;       udata_ovr
+                      00070 ;--------------------------------------------------------
+                      00071 ; interrupt and initialization code
+                      00072 ;--------------------------------------------------------
+                      00073 c_interrupt     code    0x0004
+0004                  00074 __sdcc_interrupt:
+                      00075 ;***
+                      00076 ;  pBlock Stats: dbName = I
+                      00077 ;***
+                      00078 ;functions called:
+                      00079 ;   _PB_DRIVER_UPDATE
+                      00080 ;   _COUNT_UPDATE
+                      00081 ;   _SSD_UPDATE
+                      00082 ;   _PB_DRIVER_UPDATE
+                      00083 ;   _COUNT_UPDATE
+                      00084 ;   _SSD_UPDATE
+                      00085 ;; Starting pCode block
+                      00086 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00087 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2802:genLabel *{*
+                      00088 ;; ***  genLabel  2805
+                      00089 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00090 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2382:genFunction *{*
+                      00091 ;; ***  genFunction  2384 curr label offset=4previous max_key=0 
+0004                  00092 _timer0_driver_update:
+                      00093 ; 0 exit points
+                      00094 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2449:genFunction
+                      00095         .line   26; "timer0_driver.c"   void timer0_driver_update(void) __interrupt 0{
+0004   00??           00096         MOVWF   WSAVE
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE  3
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+                      00097 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2450:genFunction
+0005   0E03           00098         SWAPF   STATUS,W
+                      00099 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2455:genFunction
+0006   0183           00100         CLRF    STATUS
+                      00101 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2456:genFunction
+0007   00??           00102         MOVWF   SSAVE
+                      00103 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2458:genFunction
+0008   080A           00104         MOVF    PCLATH,W
+                      00105 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2460:genFunction
+0009   018A           00106         CLRF    PCLATH
+                      00107 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2461:genFunction
+000A   00??           00108         MOVWF   PSAVE
+                      00109 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2463:genFunction
+000B   0804           00110         MOVF    FSR,W
+                      00111 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2464:genFunction
+                      00112 ;;      popGetExternal 990 added symbol ___sdcc_saved_fsr
+000C   0??? 0???      00113         BANKSEL ___sdcc_saved_fsr
+000E   00??           00114         MOVWF   ___sdcc_saved_fsr
+                      00115 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00116 ;; ***  genPlus  707
+                      00117 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/genarith.c:708:genPlus *{*
+                      00118 ;; ***  aopForSym 324
+                      00119 ;;      336 sym->rname = _timer0_driver_update_counter_65536_18, size = 2
+                      00120 ;;      589
+                      00121 ;;      line = 714 result AOP_DIR=_timer0_driver_update_counter_65536_18, size=2, left AOP_DIR=_timer0_d
+                            river_update_counter_65536_18, size=2, right AOP_LIT=0x14, size=2
+                      00122 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/genarith.c:159:genPlusIncr *{*
+                      00123 ;; ***  genPlusIncr  161
+                      00124 ;;      result AOP_DIR, left AOP_DIR, right AOP_LIT
+                      00125 ;;      genPlusIncr  173
+                      00126 ;;      adding lit to something. size 2
+                      00127 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/genarith.c:286:genAddLit *{*
+                      00128 ;; ***  genAddLit  287
+                      00129 ;; hi = 0       genAddLit  351
+                      00130 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/genarith.c:367:genAddLit
+                      00131         .line   28; "timer0_driver.c"   counter = counter + TMR0_CLOCK_PERIOD;
+000F   3014           00132         MOVLW   0x14
+                      00133 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/genarith.c:368:genAddLit
+                      00134 ;;      1027
+                      00135 ;;      1045  _timer0_driver_update_counter_65536_18   offset=0
+0010   0??? 0???      00136         BANKSEL _timer0_driver_update_counter_65536_18
+0012   07??           00137         ADDWF   _timer0_driver_update_counter_65536_18,F
+                      00138 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/genarith.c:369:genAddLit
+0013   1803           00139         BTFSC   STATUS,0
+                      00140 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/genarith.c:370:genAddLit
+                      00141 ;;      1027
+                      00142 ;;      1045  _timer0_driver_update_counter_65536_18   offset=1
+0014   0A??           00143         INCF    (_timer0_driver_update_counter_65536_18 + 1),F
+                      00144 ;; ***  addSign  1087
+                      00145 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/genarith.c:1088:addSign *{*
+                      00146 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00147 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:3689:genCmpEq *{*
+                      00148 ;; ***  genCmpEq  3690
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE  4
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+                      00149 ;; ifx is non-null
+                      00150 ;; ***  aopForSym 324
+                      00151 ;;      336 sym->rname = _timer0_driver_update_counter_65536_18, size = 2
+                      00152 ;;      line = 3701 result AOP_CRY=0x00, size=0, left AOP_DIR=_timer0_driver_update_counter_65536_18, si
+                            ze=2, right AOP_LIT=0x14, size=2
+                      00153 ;; ***  mov2w  1395  offset=0
+                      00154 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:1400:mov2w
+                      00155 ;;      1027
+                      00156 ;;      1045  _timer0_driver_update_counter_65536_18   offset=0
+                      00157         .line   30; "timer0_driver.c"   if(counter == 20){
+0015   08??           00158         MOVF    _timer0_driver_update_counter_65536_18,W
+                      00159 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:3769:genCmpEq
+0016   3A14           00160         XORLW   0x14
+                      00161 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:3771:genCmpEq
+0017   1D03           00162         BTFSS   STATUS,2
+                      00163 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:3774:genCmpEq
+                      00164 ;; ***  popGetLabel  key=2, label offset 8
+0018   2???           00165         GOTO    _00110_DS_
+                      00166 ;; ***  mov2w  1395  offset=1
+                      00167 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:1400:mov2w
+                      00168 ;;      1027
+                      00169 ;;      1045  _timer0_driver_update_counter_65536_18   offset=1
+0019   08??           00170         MOVF    (_timer0_driver_update_counter_65536_18 + 1),W
+                      00171 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:3769:genCmpEq
+001A   3A00           00172         XORLW   0x00
+                      00173 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:3771:genCmpEq
+001B   1D03           00174         BTFSS   STATUS,2
+                      00175 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:3774:genCmpEq
+                      00176 ;; ***  popGetLabel  key=2, label offset 8
+001C   2???           00177         GOTO    _00110_DS_
+                      00178 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00179 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00180 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2108:genCall *{*
+                      00181 ;; ***  genCall  2110
+                      00182 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2207:genCall
+                      00183         .line   31; "timer0_driver.c"   PB_DRIVER_UPDATE();
+001D   0??? 0???      00184         PAGESEL _PB_DRIVER_UPDATE
+                      00185 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2215:genCall
+001F   2???           00186         CALL    _PB_DRIVER_UPDATE
+                      00187 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2223:genCall
+0020   0??? 0???      00188         PAGESEL $
+                      00189 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00190 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2108:genCall *{*
+                      00191 ;; ***  genCall  2110
+                      00192 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2207:genCall
+                      00193         .line   32; "timer0_driver.c"   COUNT_UPDATE();
+0022   0??? 0???      00194         PAGESEL _COUNT_UPDATE
+                      00195 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2215:genCall
+0024   2???           00196         CALL    _COUNT_UPDATE
+                      00197 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2223:genCall
+0025   0??? 0???      00198         PAGESEL $
+                      00199 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00200 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:7192:genAssign *{*
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE  5
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+                      00201 ;; ***  genAssign  7193
+                      00202 ;; ***  aopForSym 324
+                      00203 ;;      336 sym->rname = _timer0_driver_update_counter_65536_18, size = 2
+                      00204 ;;      line = 7202 result AOP_DIR=_timer0_driver_update_counter_65536_18, size=2, left -=-, size=0, rig
+                            ht AOP_LIT=0x00, size=2
+                      00205 ;; ***  genAssign  7286
+                      00206 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:7298:genAssign
+                      00207 ;;      1027
+                      00208 ;;      1045  _timer0_driver_update_counter_65536_18   offset=0
+                      00209         .line   33; "timer0_driver.c"   counter = 0;
+0027   0??? 0???      00210         BANKSEL _timer0_driver_update_counter_65536_18
+0029   01??           00211         CLRF    _timer0_driver_update_counter_65536_18
+                      00212 ;; ***  genAssign  7286
+                      00213 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:7298:genAssign
+                      00214 ;;      1027
+                      00215 ;;      1045  _timer0_driver_update_counter_65536_18   offset=1
+002A   01??           00216         CLRF    (_timer0_driver_update_counter_65536_18 + 1)
+                      00217 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00218 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2802:genLabel *{*
+                      00219 ;; ***  genLabel  2805
+                      00220 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00221 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2108:genCall *{*
+                      00222 ;; ***  genCall  2110
+                      00223 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2207:genCall
+002B                  00224 _00110_DS_:
+                      00225         .line   36; "timer0_driver.c"   SSD_UPDATE();
+002B   0??? 0???      00226         PAGESEL _SSD_UPDATE
+                      00227 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2215:genCall
+002D   2???           00228         CALL    _SSD_UPDATE
+                      00229 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2223:genCall
+002E   0??? 0???      00230         PAGESEL $
+                      00231 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00232 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2802:genLabel *{*
+                      00233 ;; ***  genLabel  2805
+                      00234 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00235 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2570:genEndFunction *{*
+                      00236 ;; ***  genEndFunction  2572
+                      00237 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2045:unsaverbank *{*
+                      00238 ;; ***  unsaverbank  2047 - WARNING no code generated
+                      00239 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2664:genEndFunction
+                      00240 ;;      popGetExternal 990 added symbol ___sdcc_saved_fsr
+                      00241         .line   37; "timer0_driver.c"   }
+0030   0??? 0???      00242         BANKSEL ___sdcc_saved_fsr
+0032   08??           00243         MOVF    ___sdcc_saved_fsr,W
+                      00244 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2665:genEndFunction
+0033   1283 1303      00245         BANKSEL FSR
+0035   0084           00246         MOVWF   FSR
+                      00247 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2667:genEndFunction
+0036   08??           00248         MOVF    PSAVE,W
+                      00249 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2668:genEndFunction
+0037   008A           00250         MOVWF   PCLATH
+                      00251 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2669:genEndFunction
+0038   0183           00252         CLRF    STATUS
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE  6
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+                      00253 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2671:genEndFunction
+0039   0E??           00254         SWAPF   SSAVE,W
+                      00255 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2672:genEndFunction
+003A   0083           00256         MOVWF   STATUS
+                      00257 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2673:genEndFunction
+003B   0E??           00258         SWAPF   WSAVE,F
+                      00259 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2674:genEndFunction
+003C   0E??           00260         SWAPF   WSAVE,W
+003D                  00261 END_OF_INTERRUPT:
+003D   0009           00262         RETFIE  
+                      00263 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:7710:genpic14Code *{*
+                      00264 
+                      00265 ;--------------------------------------------------------
+                      00266 ; code
+                      00267 ;--------------------------------------------------------
+                      00268 code_timer0_driver      code
+                      00269 ;***
+                      00270 ;  pBlock Stats: dbName = C
+                      00271 ;***
+                      00272 ;has an exit
+                      00273 ;; Starting pCode block
+                      00274 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00275 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2802:genLabel *{*
+                      00276 ;; ***  genLabel  2805
+                      00277 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00278 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2382:genFunction *{*
+                      00279 ;; ***  genFunction  2384 curr label offset=8previous max_key=2 
+                      00280 S_timer0_driver__timer0_driver_start    code
+0000                  00281 _timer0_driver_start:
+                      00282 ; 2 exit points
+                      00283 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00284 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00285 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6951:genPointerSet *{*
+                      00286 ;; ***  genPointerSet  6952
+                      00287 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6871:genNearPointerSet *{*
+                      00288 ;; ***  genNearPointerSet  6872
+                      00289 ;;      627
+                      00290 ;;      aopForRemat 406
+                      00291 ;;      432: rname _INTCONbits, val 0, const = 0
+                      00292 ;; ***  genNearPointerSet  6886
+                      00293 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00294 ;;      _INTCONbits
+                      00295 ;;      line = 6888 result AOP_PCODE=_INTCONbits, size=2, left -=-, size=0, right AOP_LIT=0x01, size=1
+                      00296 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6689:genPackBits *{*
+                      00297 ;; ***  genPackBits  6690
+                      00298 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00299 ;;      _INTCONbits
+                      00300 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6712:genPackBits
+                      00301         .line   40; "timer0_driver.c"   TMR0_ISR_ENABLE(1);
+0000   0??? 0???      00302         BANKSEL _INTCONbits
+0002   16??           00303         BSF     _INTCONbits,5
+                      00304 ;; ***  genNearPointerSet  6905
+                      00305 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE  7
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+                      00306 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00307 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6951:genPointerSet *{*
+                      00308 ;; ***  genPointerSet  6952
+                      00309 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6871:genNearPointerSet *{*
+                      00310 ;; ***  genNearPointerSet  6872
+                      00311 ;;      627
+                      00312 ;;      aopForRemat 406
+                      00313 ;;      432: rname _INTCONbits, val 0, const = 0
+                      00314 ;; ***  genNearPointerSet  6886
+                      00315 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00316 ;;      _INTCONbits
+                      00317 ;;      line = 6888 result AOP_PCODE=_INTCONbits, size=2, left -=-, size=0, right AOP_LIT=0x01, size=1
+                      00318 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6689:genPackBits *{*
+                      00319 ;; ***  genPackBits  6690
+                      00320 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00321 ;;      _INTCONbits
+                      00322 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6712:genPackBits
+                      00323         .line   41; "timer0_driver.c"   GIE = 1;
+0003   17??           00324         BSF     _INTCONbits,7
+                      00325 ;; ***  genNearPointerSet  6905
+                      00326 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00327 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00328 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6951:genPointerSet *{*
+                      00329 ;; ***  genPointerSet  6952
+                      00330 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6871:genNearPointerSet *{*
+                      00331 ;; ***  genNearPointerSet  6872
+                      00332 ;;      627
+                      00333 ;;      aopForRemat 406
+                      00334 ;;      432: rname _OPTION_REGbits, val 0, const = 0
+                      00335 ;; ***  genNearPointerSet  6886
+                      00336 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00337 ;;      _OPTION_REGbits
+                      00338 ;;      line = 6888 result AOP_PCODE=_OPTION_REGbits, size=2, left -=-, size=0, right AOP_LIT=0x00, size
+                            =1
+                      00339 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6689:genPackBits *{*
+                      00340 ;; ***  genPackBits  6690
+                      00341 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00342 ;;      _OPTION_REGbits
+                      00343 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6712:genPackBits
+                      00344         .line   42; "timer0_driver.c"   TMR0_CLOCK_SELECTION(0);
+0004   0??? 0???      00345         BANKSEL _OPTION_REGbits
+0006   12??           00346         BCF     _OPTION_REGbits,5
+                      00347 ;; ***  genNearPointerSet  6905
+                      00348 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00349 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2802:genLabel *{*
+                      00350 ;; ***  genLabel  2805
+                      00351 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00352 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2570:genEndFunction *{*
+                      00353 ;; ***  genEndFunction  2572
+                      00354         .line   43; "timer0_driver.c"   }
+0007   0008           00355         RETURN  
+                      00356 ; exit point of _timer0_driver_start
+                      00357 
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE  8
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+                      00358 ;***
+                      00359 ;  pBlock Stats: dbName = C
+                      00360 ;***
+                      00361 ;has an exit
+                      00362 ;; Starting pCode block
+                      00363 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00364 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2802:genLabel *{*
+                      00365 ;; ***  genLabel  2805
+                      00366 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00367 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2382:genFunction *{*
+                      00368 ;; ***  genFunction  2384 curr label offset=0previous max_key=0 
+                      00369 S_timer0_driver__timer0_driver_init     code
+0000                  00370 _timer0_driver_init:
+                      00371 ; 2 exit points
+                      00372 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00373 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00374 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6951:genPointerSet *{*
+                      00375 ;; ***  genPointerSet  6952
+                      00376 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6871:genNearPointerSet *{*
+                      00377 ;; ***  genNearPointerSet  6872
+                      00378 ;;      627
+                      00379 ;;      aopForRemat 406
+                      00380 ;;      432: rname _OPTION_REGbits, val 0, const = 0
+                      00381 ;; ***  genNearPointerSet  6886
+                      00382 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00383 ;;      _OPTION_REGbits
+                      00384 ;;      line = 6888 result AOP_PCODE=_OPTION_REGbits, size=2, left -=-, size=0, right AOP_LIT=0x01, size
+                            =1
+                      00385 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6689:genPackBits *{*
+                      00386 ;; ***  genPackBits  6690
+                      00387 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00388 ;;      _OPTION_REGbits
+                      00389 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6712:genPackBits
+                      00390         .line   22; "timer0_driver.c"   TMR0_CLOCK_SELECTION(1);
+0000   0??? 0???      00391         BANKSEL _OPTION_REGbits
+0002   16??           00392         BSF     _OPTION_REGbits,5
+                      00393 ;; ***  genNearPointerSet  6905
+                      00394 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00395 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00396 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6951:genPointerSet *{*
+                      00397 ;; ***  genPointerSet  6952
+                      00398 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6871:genNearPointerSet *{*
+                      00399 ;; ***  genNearPointerSet  6872
+                      00400 ;;      627
+                      00401 ;;      aopForRemat 406
+                      00402 ;;      432: rname _OPTION_REGbits, val 0, const = 0
+                      00403 ;; ***  genNearPointerSet  6886
+                      00404 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00405 ;;      _OPTION_REGbits
+                      00406 ;;      line = 6888 result AOP_PCODE=_OPTION_REGbits, size=2, left -=-, size=0, right AOP_LIT=0x00, size
+                            =1
+                      00407 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6689:genPackBits *{*
+                      00408 ;; ***  genPackBits  6690
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE  9
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+                      00409 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00410 ;;      _OPTION_REGbits
+                      00411 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6712:genPackBits
+                      00412         .line   23; "timer0_driver.c"   TMR0_SET_PRE_SCALAR(7);
+0003   11??           00413         BCF     _OPTION_REGbits,3
+                      00414 ;; ***  genNearPointerSet  6905
+                      00415 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00416 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00417 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6951:genPointerSet *{*
+                      00418 ;; ***  genPointerSet  6952
+                      00419 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6871:genNearPointerSet *{*
+                      00420 ;; ***  genNearPointerSet  6872
+                      00421 ;;      627
+                      00422 ;;      aopForRemat 406
+                      00423 ;;      432: rname _OPTION_REGbits, val 0, const = 0
+                      00424 ;; ***  genNearPointerSet  6886
+                      00425 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00426 ;;      _OPTION_REGbits
+                      00427 ;;      line = 6888 result AOP_PCODE=_OPTION_REGbits, size=2, left -=-, size=0, right AOP_LIT=0x01, size
+                            =1
+                      00428 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6689:genPackBits *{*
+                      00429 ;; ***  genPackBits  6690
+                      00430 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00431 ;;      _OPTION_REGbits
+                      00432 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6712:genPackBits
+0004   14??           00433         BSF     _OPTION_REGbits,0
+                      00434 ;; ***  genNearPointerSet  6905
+                      00435 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00436 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00437 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6951:genPointerSet *{*
+                      00438 ;; ***  genPointerSet  6952
+                      00439 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6871:genNearPointerSet *{*
+                      00440 ;; ***  genNearPointerSet  6872
+                      00441 ;;      627
+                      00442 ;;      aopForRemat 406
+                      00443 ;;      432: rname _OPTION_REGbits, val 0, const = 0
+                      00444 ;; ***  genNearPointerSet  6886
+                      00445 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00446 ;;      _OPTION_REGbits
+                      00447 ;;      line = 6888 result AOP_PCODE=_OPTION_REGbits, size=2, left -=-, size=0, right AOP_LIT=0x01, size
+                            =1
+                      00448 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6689:genPackBits *{*
+                      00449 ;; ***  genPackBits  6690
+                      00450 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00451 ;;      _OPTION_REGbits
+                      00452 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6712:genPackBits
+0005   14??           00453         BSF     _OPTION_REGbits,1
+                      00454 ;; ***  genNearPointerSet  6905
+                      00455 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00456 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00457 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6951:genPointerSet *{*
+                      00458 ;; ***  genPointerSet  6952
+                      00459 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6871:genNearPointerSet *{*
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE 10
+
+
+LOC    OBJECT CODE    LINE  SOURCE TEXT
+  VALUE
+
+                      00460 ;; ***  genNearPointerSet  6872
+                      00461 ;;      627
+                      00462 ;;      aopForRemat 406
+                      00463 ;;      432: rname _OPTION_REGbits, val 0, const = 0
+                      00464 ;; ***  genNearPointerSet  6886
+                      00465 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00466 ;;      _OPTION_REGbits
+                      00467 ;;      line = 6888 result AOP_PCODE=_OPTION_REGbits, size=2, left -=-, size=0, right AOP_LIT=0x01, size
+                            =1
+                      00468 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6689:genPackBits *{*
+                      00469 ;; ***  genPackBits  6690
+                      00470 ;;      837: aopGet AOP_PCODE type PO_IMMEDIATE
+                      00471 ;;      _OPTION_REGbits
+                      00472 ;; >>> /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:6712:genPackBits
+0006   15??           00473         BSF     _OPTION_REGbits,2
+                      00474 ;; ***  genNearPointerSet  6905
+                      00475 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00476 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2802:genLabel *{*
+                      00477 ;; ***  genLabel  2805
+                      00478 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2358:resultRemat *{*
+                      00479 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:2570:genEndFunction *{*
+                      00480 ;; ***  genEndFunction  2572
+                      00481         .line   24; "timer0_driver.c"   }
+0007   0008           00482         RETURN  
+                      00483 ; exit point of _timer0_driver_init
+                      00484 ;;; /home/sdcc-builder/build/sdcc-build/orig/sdcc/src/pic14/gen.c:7710:genpic14Code *{*
+                      00485 
+                      00486 
+                      00487 ;       code size estimation:
+                      00488 ;          46+   14 =    60 instructions (  148 byte)
+                      00489 
+                      00490         end
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE 11
+
+
+SYMBOL TABLE
+  LABEL                              TYPE        VALUE         VALUE          VALUE
+                                                 (hex)         (dec)          (text)
+
+ACKDT                             CONSTANT      00000005              5
+ACKEN                             CONSTANT      00000004              4
+ACKSTAT                           CONSTANT      00000006              6
+ADCON0                            CONSTANT      0000001F             31
+ADCON1                            CONSTANT      0000009F            159
+ADCS0                             CONSTANT      00000006              6
+ADCS1                             CONSTANT      00000007              7
+ADCS2                             CONSTANT      00000006              6
+ADDEN                             CONSTANT      00000003              3
+ADFM                              CONSTANT      00000007              7
+ADIE                              CONSTANT      00000006              6
+ADIF                              CONSTANT      00000006              6
+ADON                              CONSTANT      00000000              0
+ADRESH                            CONSTANT      0000001E             30
+ADRESL                            CONSTANT      0000009E            158
+BCLIE                             CONSTANT      00000003              3
+BCLIF                             CONSTANT      00000003              3
+BF                                CONSTANT      00000000              0
+BRGH                              CONSTANT      00000002              2
+C                                 CONSTANT      00000000              0
+C1INV                             CONSTANT      00000004              4
+C1OUT                             CONSTANT      00000006              6
+C2INV                             CONSTANT      00000005              5
+C2OUT                             CONSTANT      00000007              7
+CCP1CON                           CONSTANT      00000017             23
+CCP1IE                            CONSTANT      00000002              2
+CCP1IF                            CONSTANT      00000002              2
+CCP1M0                            CONSTANT      00000000              0
+CCP1M1                            CONSTANT      00000001              1
+CCP1M2                            CONSTANT      00000002              2
+CCP1M3                            CONSTANT      00000003              3
+CCP1X                             CONSTANT      00000005              5
+CCP1Y                             CONSTANT      00000004              4
+CCP2CON                           CONSTANT      0000001D             29
+CCP2IE                            CONSTANT      00000000              0
+CCP2IF                            CONSTANT      00000000              0
+CCP2M0                            CONSTANT      00000000              0
+CCP2M1                            CONSTANT      00000001              1
+CCP2M2                            CONSTANT      00000002              2
+CCP2M3                            CONSTANT      00000003              3
+CCP2X                             CONSTANT      00000005              5
+CCP2Y                             CONSTANT      00000004              4
+CCPR1                             CONSTANT      00000015             21
+CCPR1H                            CONSTANT      00000016             22
+CCPR1L                            CONSTANT      00000015             21
+CCPR2                             CONSTANT      0000001B             27
+CCPR2H                            CONSTANT      0000001C             28
+CCPR2L                            CONSTANT      0000001B             27
+CHS0                              CONSTANT      00000003              3
+CHS1                              CONSTANT      00000004              4
+CHS2                              CONSTANT      00000005              5
+CIS                               CONSTANT      00000003              3
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE 12
+
+
+SYMBOL TABLE
+  LABEL                              TYPE        VALUE         VALUE          VALUE
+                                                 (hex)         (dec)          (text)
+
+CKE                               CONSTANT      00000006              6
+CKP                               CONSTANT      00000004              4
+CM0                               CONSTANT      00000000              0
+CM1                               CONSTANT      00000001              1
+CM2                               CONSTANT      00000002              2
+CMCON                             CONSTANT      0000009C            156
+CMIE                              CONSTANT      00000006              6
+CMIF                              CONSTANT      00000006              6
+CREN                              CONSTANT      00000004              4
+CSRC                              CONSTANT      00000007              7
+CVR0                              CONSTANT      00000000              0
+CVR1                              CONSTANT      00000001              1
+CVR2                              CONSTANT      00000002              2
+CVR3                              CONSTANT      00000003              3
+CVRCON                            CONSTANT      0000009D            157
+CVREN                             CONSTANT      00000007              7
+CVROE                             CONSTANT      00000006              6
+CVRR                              CONSTANT      00000005              5
+D                                 CONSTANT      00000005              5
+DATA_ADDRESS                      CONSTANT      00000005              5
+DC                                CONSTANT      00000001              1
+D_A                               CONSTANT      00000005              5
+D_NOT_A                           CONSTANT      00000005              5
+EEADR                             CONSTANT      0000010D            269
+EEADRH                            CONSTANT      0000010F            271
+EECON1                            CONSTANT      0000018C            396
+EECON2                            CONSTANT      0000018D            397
+EEDATA                            CONSTANT      0000010C            268
+EEDATH                            CONSTANT      0000010E            270
+EEIE                              CONSTANT      00000004              4
+EEIF                              CONSTANT      00000004              4
+EEPGD                             CONSTANT      00000007              7
+END_OF_INTERRUPT                  ADDRESS       0000003D             61
+F                                 CONSTANT      00000001              1
+FERR                              CONSTANT      00000002              2
+FSR                               CONSTANT      00000004              4
+GCEN                              CONSTANT      00000007              7
+GIE                               CONSTANT      00000007              7
+GO                                CONSTANT      00000002              2
+GO_DONE                           CONSTANT      00000002              2
+GO_NOT_DONE                       CONSTANT      00000002              2
+I2C_DATA                          CONSTANT      00000005              5
+I2C_READ                          CONSTANT      00000002              2
+I2C_START                         CONSTANT      00000003              3
+I2C_STOP                          CONSTANT      00000004              4
+IBF                               CONSTANT      00000007              7
+IBOV                              CONSTANT      00000005              5
+INDF                              CONSTANT      00000000              0
+INTCON                            CONSTANT      0000000B             11
+INTE                              CONSTANT      00000004              4
+INTEDG                            CONSTANT      00000006              6
+INTF                              CONSTANT      00000001              1
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE 13
+
+
+SYMBOL TABLE
+  LABEL                              TYPE        VALUE         VALUE          VALUE
+                                                 (hex)         (dec)          (text)
+
+IRP                               CONSTANT      00000007              7
+NOT_A                             CONSTANT      00000005              5
+NOT_ADDRESS                       CONSTANT      00000005              5
+NOT_BO                            CONSTANT      00000000              0
+NOT_BOR                           CONSTANT      00000000              0
+NOT_DONE                          CONSTANT      00000002              2
+NOT_PD                            CONSTANT      00000003              3
+NOT_POR                           CONSTANT      00000001              1
+NOT_RBPU                          CONSTANT      00000007              7
+NOT_RC8                           CONSTANT      00000006              6
+NOT_T1SYNC                        CONSTANT      00000002              2
+NOT_TO                            CONSTANT      00000004              4
+NOT_TX8                           CONSTANT      00000006              6
+NOT_W                             CONSTANT      00000002              2
+NOT_WRITE                         CONSTANT      00000002              2
+OBF                               CONSTANT      00000006              6
+OERR                              CONSTANT      00000001              1
+OPTION_REG                        CONSTANT      00000081            129
+P                                 CONSTANT      00000004              4
+PCFG0                             CONSTANT      00000000              0
+PCFG1                             CONSTANT      00000001              1
+PCFG2                             CONSTANT      00000002              2
+PCFG3                             CONSTANT      00000003              3
+PCL                               CONSTANT      00000002              2
+PCLATH                            CONSTANT      0000000A             10
+PCON                              CONSTANT      0000008E            142
+PEIE                              CONSTANT      00000006              6
+PEN                               CONSTANT      00000002              2
+PIE1                              CONSTANT      0000008C            140
+PIE2                              CONSTANT      0000008D            141
+PIR1                              CONSTANT      0000000C             12
+PIR2                              CONSTANT      0000000D             13
+PORTA                             CONSTANT      00000005              5
+PORTB                             CONSTANT      00000006              6
+PORTC                             CONSTANT      00000007              7
+PORTD                             CONSTANT      00000008              8
+PORTE                             CONSTANT      00000009              9
+PR2                               CONSTANT      00000092            146
+PS0                               CONSTANT      00000000              0
+PS1                               CONSTANT      00000001              1
+PS2                               CONSTANT      00000002              2
+PSA                               CONSTANT      00000003              3
+PSAVE                             EXTERNAL      00000000              0
+PSPIE                             CONSTANT      00000007              7
+PSPIF                             CONSTANT      00000007              7
+PSPMODE                           CONSTANT      00000004              4
+R                                 CONSTANT      00000002              2
+RA0                               CONSTANT      00000000              0
+RA1                               CONSTANT      00000001              1
+RA2                               CONSTANT      00000002              2
+RA3                               CONSTANT      00000003              3
+RA4                               CONSTANT      00000004              4
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                              TYPE        VALUE         VALUE          VALUE
+                                                 (hex)         (dec)          (text)
+
+RA5                               CONSTANT      00000005              5
+RB0                               CONSTANT      00000000              0
+RB1                               CONSTANT      00000001              1
+RB2                               CONSTANT      00000002              2
+RB3                               CONSTANT      00000003              3
+RB4                               CONSTANT      00000004              4
+RB5                               CONSTANT      00000005              5
+RB6                               CONSTANT      00000006              6
+RB7                               CONSTANT      00000007              7
+RBIE                              CONSTANT      00000003              3
+RBIF                              CONSTANT      00000000              0
+RC0                               CONSTANT      00000000              0
+RC1                               CONSTANT      00000001              1
+RC2                               CONSTANT      00000002              2
+RC3                               CONSTANT      00000003              3
+RC4                               CONSTANT      00000004              4
+RC5                               CONSTANT      00000005              5
+RC6                               CONSTANT      00000006              6
+RC7                               CONSTANT      00000007              7
+RC8_9                             CONSTANT      00000006              6
+RC9                               CONSTANT      00000006              6
+RCD8                              CONSTANT      00000000              0
+RCEN                              CONSTANT      00000003              3
+RCIE                              CONSTANT      00000005              5
+RCIF                              CONSTANT      00000005              5
+RCREG                             CONSTANT      0000001A             26
+RCSTA                             CONSTANT      00000018             24
+RD                                CONSTANT      00000000              0
+RD0                               CONSTANT      00000000              0
+RD1                               CONSTANT      00000001              1
+RD2                               CONSTANT      00000002              2
+RD3                               CONSTANT      00000003              3
+RD4                               CONSTANT      00000004              4
+RD5                               CONSTANT      00000005              5
+RD6                               CONSTANT      00000006              6
+RD7                               CONSTANT      00000007              7
+RE0                               CONSTANT      00000000              0
+RE1                               CONSTANT      00000001              1
+RE2                               CONSTANT      00000002              2
+READ_WRITE                        CONSTANT      00000002              2
+RP0                               CONSTANT      00000005              5
+RP1                               CONSTANT      00000006              6
+RSEN                              CONSTANT      00000001              1
+RX9                               CONSTANT      00000006              6
+RX9D                              CONSTANT      00000000              0
+R_NOT_W                           CONSTANT      00000002              2
+R_W                               CONSTANT      00000002              2
+S                                 CONSTANT      00000003              3
+SEN                               CONSTANT      00000000              0
+SMP                               CONSTANT      00000007              7
+SPBRG                             CONSTANT      00000099            153
+SPEN                              CONSTANT      00000007              7
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                              TYPE        VALUE         VALUE          VALUE
+                                                 (hex)         (dec)          (text)
+
+SREN                              CONSTANT      00000005              5
+SSAVE                             EXTERNAL      00000000              0
+SSPADD                            CONSTANT      00000093            147
+SSPBUF                            CONSTANT      00000013             19
+SSPCON                            CONSTANT      00000014             20
+SSPCON2                           CONSTANT      00000091            145
+SSPEN                             CONSTANT      00000005              5
+SSPIE                             CONSTANT      00000003              3
+SSPIF                             CONSTANT      00000003              3
+SSPM0                             CONSTANT      00000000              0
+SSPM1                             CONSTANT      00000001              1
+SSPM2                             CONSTANT      00000002              2
+SSPM3                             CONSTANT      00000003              3
+SSPOV                             CONSTANT      00000006              6
+SSPSTAT                           CONSTANT      00000094            148
+STATUS                            CONSTANT      00000003              3
+STK00                             EXTERNAL      00000000              0
+STK01                             EXTERNAL      00000000              0
+STK02                             EXTERNAL      00000000              0
+STK03                             EXTERNAL      00000000              0
+STK04                             EXTERNAL      00000000              0
+STK05                             EXTERNAL      00000000              0
+STK06                             EXTERNAL      00000000              0
+STK07                             EXTERNAL      00000000              0
+STK08                             EXTERNAL      00000000              0
+STK09                             EXTERNAL      00000000              0
+STK10                             EXTERNAL      00000000              0
+STK11                             EXTERNAL      00000000              0
+STK12                             EXTERNAL      00000000              0
+SYNC                              CONSTANT      00000004              4
+T0CS                              CONSTANT      00000005              5
+T0IE                              CONSTANT      00000005              5
+T0IF                              CONSTANT      00000002              2
+T0SE                              CONSTANT      00000004              4
+T1CKPS0                           CONSTANT      00000004              4
+T1CKPS1                           CONSTANT      00000005              5
+T1CON                             CONSTANT      00000010             16
+T1INSYNC                          CONSTANT      00000002              2
+T1OSCEN                           CONSTANT      00000003              3
+T1SYNC                            CONSTANT      00000002              2
+T2CKPS0                           CONSTANT      00000000              0
+T2CKPS1                           CONSTANT      00000001              1
+T2CON                             CONSTANT      00000012             18
+TMR0                              CONSTANT      00000001              1
+TMR0IE                            CONSTANT      00000005              5
+TMR0IF                            CONSTANT      00000002              2
+TMR1                              CONSTANT      0000000E             14
+TMR1CS                            CONSTANT      00000001              1
+TMR1H                             CONSTANT      0000000F             15
+TMR1IE                            CONSTANT      00000000              0
+TMR1IF                            CONSTANT      00000000              0
+TMR1L                             CONSTANT      0000000E             14
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE 16
+
+
+SYMBOL TABLE
+  LABEL                              TYPE        VALUE         VALUE          VALUE
+                                                 (hex)         (dec)          (text)
+
+TMR1ON                            CONSTANT      00000000              0
+TMR2                              CONSTANT      00000011             17
+TMR2IE                            CONSTANT      00000001              1
+TMR2IF                            CONSTANT      00000001              1
+TMR2ON                            CONSTANT      00000002              2
+TOUTPS0                           CONSTANT      00000003              3
+TOUTPS1                           CONSTANT      00000004              4
+TOUTPS2                           CONSTANT      00000005              5
+TOUTPS3                           CONSTANT      00000006              6
+TRISA                             CONSTANT      00000085            133
+TRISA0                            CONSTANT      00000000              0
+TRISA1                            CONSTANT      00000001              1
+TRISA2                            CONSTANT      00000002              2
+TRISA3                            CONSTANT      00000003              3
+TRISA4                            CONSTANT      00000004              4
+TRISA5                            CONSTANT      00000005              5
+TRISB                             CONSTANT      00000086            134
+TRISB0                            CONSTANT      00000000              0
+TRISB1                            CONSTANT      00000001              1
+TRISB2                            CONSTANT      00000002              2
+TRISB3                            CONSTANT      00000003              3
+TRISB4                            CONSTANT      00000004              4
+TRISB5                            CONSTANT      00000005              5
+TRISB6                            CONSTANT      00000006              6
+TRISB7                            CONSTANT      00000007              7
+TRISC                             CONSTANT      00000087            135
+TRISC0                            CONSTANT      00000000              0
+TRISC1                            CONSTANT      00000001              1
+TRISC2                            CONSTANT      00000002              2
+TRISC3                            CONSTANT      00000003              3
+TRISC4                            CONSTANT      00000004              4
+TRISC5                            CONSTANT      00000005              5
+TRISC6                            CONSTANT      00000006              6
+TRISC7                            CONSTANT      00000007              7
+TRISD                             CONSTANT      00000088            136
+TRISD0                            CONSTANT      00000000              0
+TRISD1                            CONSTANT      00000001              1
+TRISD2                            CONSTANT      00000002              2
+TRISD3                            CONSTANT      00000003              3
+TRISD4                            CONSTANT      00000004              4
+TRISD5                            CONSTANT      00000005              5
+TRISD6                            CONSTANT      00000006              6
+TRISD7                            CONSTANT      00000007              7
+TRISE                             CONSTANT      00000089            137
+TRISE0                            CONSTANT      00000000              0
+TRISE1                            CONSTANT      00000001              1
+TRISE2                            CONSTANT      00000002              2
+TRMT                              CONSTANT      00000001              1
+TX8_9                             CONSTANT      00000006              6
+TX9                               CONSTANT      00000006              6
+TX9D                              CONSTANT      00000000              0
+TXD8                              CONSTANT      00000000              0
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE 17
+
+
+SYMBOL TABLE
+  LABEL                              TYPE        VALUE         VALUE          VALUE
+                                                 (hex)         (dec)          (text)
+
+TXEN                              CONSTANT      00000005              5
+TXIE                              CONSTANT      00000004              4
+TXIF                              CONSTANT      00000004              4
+TXREG                             CONSTANT      00000019             25
+TXSTA                             CONSTANT      00000098            152
+UA                                CONSTANT      00000001              1
+W                                 CONSTANT      00000000              0
+WCOL                              CONSTANT      00000007              7
+WR                                CONSTANT      00000001              1
+WREN                              CONSTANT      00000002              2
+WRERR                             CONSTANT      00000003              3
+WSAVE                             EXTERNAL      00000000              0
+Z                                 CONSTANT      00000002              2
+_00110_DS_                        ADDRESS       0000002B             43
+_BODEN_OFF                        CONSTANT      00003FBF          16319
+_BODEN_ON                         CONSTANT      00003FFF          16383
+_BOREN_OFF                        CONSTANT      00003FBF          16319
+_BOREN_ON                         CONSTANT      00003FFF          16383
+_CONFIG                           CONSTANT      00002007           8199
+_COUNT_UPDATE                     EXTERNAL      00000000              0
+_CPD_OFF                          CONSTANT      00003FFF          16383
+_CPD_ON                           CONSTANT      00003EFF          16127
+_CP_ALL                           CONSTANT      00001FFF           8191
+_CP_OFF                           CONSTANT      00003FFF          16383
+_CP_ON                            CONSTANT      00001FFF           8191
+_DEBUG_OFF                        CONSTANT      00003FFF          16383
+_DEBUG_ON                         CONSTANT      000037FF          14335
+_DEVID1                           CONSTANT      00002006           8198
+_FOSC_EXTRC                       CONSTANT      00003FFF          16383
+_FOSC_HS                          CONSTANT      00003FFE          16382
+_FOSC_LP                          CONSTANT      00003FFC          16380
+_FOSC_XT                          CONSTANT      00003FFD          16381
+_HS_OSC                           CONSTANT      00003FFE          16382
+_IDLOC0                           CONSTANT      00002000           8192
+_IDLOC1                           CONSTANT      00002001           8193
+_IDLOC2                           CONSTANT      00002002           8194
+_IDLOC3                           CONSTANT      00002003           8195
+_INTCONbits                       EXTERNAL      00000000              0
+_LP_OSC                           CONSTANT      00003FFC          16380
+_LVP_OFF                          CONSTANT      00003F7F          16255
+_LVP_ON                           CONSTANT      00003FFF          16383
+_OPTION_REGbits                   EXTERNAL      00000000              0
+_PB_DRIVER_UPDATE                 EXTERNAL      00000000              0
+_PWRTE_OFF                        CONSTANT      00003FFF          16383
+_PWRTE_ON                         CONSTANT      00003FF7          16375
+_RC_OSC                           CONSTANT      00003FFF          16383
+_SSD_UPDATE                       EXTERNAL      00000000              0
+_WDTE_OFF                         CONSTANT      00003FFB          16379
+_WDTE_ON                          CONSTANT      00003FFF          16383
+_WDT_OFF                          CONSTANT      00003FFB          16379
+_WDT_ON                           CONSTANT      00003FFF          16383
+_WRT_1FOURTH                      CONSTANT      00003BFF          15359
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE 18
+
+
+SYMBOL TABLE
+  LABEL                              TYPE        VALUE         VALUE          VALUE
+                                                 (hex)         (dec)          (text)
+
+_WRT_256                          CONSTANT      00003DFF          15871
+_WRT_HALF                         CONSTANT      000039FF          14847
+_WRT_OFF                          CONSTANT      00003FFF          16383
+_XT_OSC                           CONSTANT      00003FFD          16381
+__14_BIT                          CONSTANT      00000001              1
+__16F877A                         CONSTANT      00000001              1
+__ACTIVE_BANK_ADDR                VARIABLE      FFFFFFFF             -1
+__ACTIVE_PAGE_ADDR                VARIABLE      FFFFFFFF             -1
+__ASSUMED_BANK_ADDR               VARIABLE      FFFFFFFF             -1
+__BANK_0                          CONSTANT      00000000              0
+__BANK_1                          CONSTANT      00000080            128
+__BANK_2                          CONSTANT      00000100            256
+__BANK_3                          CONSTANT      00000180            384
+__BANK_BITS                       CONSTANT      00000180            384
+__BANK_FIRST                      CONSTANT      00000000              0
+__BANK_INV                        CONSTANT      FFFFFFFF             -1
+__BANK_LAST                       CONSTANT      00000180            384
+__BANK_MASK                       CONSTANT      0000007F            127
+__BANK_SHIFT                      CONSTANT      00000007              7
+__BANK_SIZE                       CONSTANT      00000080            128
+__CODE_END                        CONSTANT      00001FFF           8191
+__CODE_START                      CONSTANT      00000000              0
+__COMMON_RAM_END                  CONSTANT      0000007F            127
+__COMMON_RAM_START                CONSTANT      00000070            112
+__CONFIG_END                      CONSTANT      00002007           8199
+__CONFIG_START                    CONSTANT      00002007           8199
+__EEPROM_END                      CONSTANT      000021FF           8703
+__EEPROM_START                    CONSTANT      00002100           8448
+__GPUTILS_SVN_VERSION             CONSTANT      00000505           1285
+__GPUTILS_VERSION_MAJOR           CONSTANT      00000001              1
+__GPUTILS_VERSION_MICRO           CONSTANT      00000000              0
+__GPUTILS_VERSION_MINOR           CONSTANT      00000005              5
+__IDLOCS_END                      CONSTANT      00002003           8195
+__IDLOCS_START                    CONSTANT      00002000           8192
+__NUM_BANKS                       CONSTANT      00000004              4
+__NUM_PAGES                       CONSTANT      00000004              4
+__PAGE_0                          CONSTANT      00000000              0
+__PAGE_1                          CONSTANT      00000800           2048
+__PAGE_2                          CONSTANT      00001000           4096
+__PAGE_3                          CONSTANT      00001800           6144
+__PAGE_BITS                       CONSTANT      00001800           6144
+__PAGE_FIRST                      CONSTANT      00000000              0
+__PAGE_INV                        CONSTANT      FFFFFFFF             -1
+__PAGE_LAST                       CONSTANT      00001800           6144
+__PAGE_MASK                       CONSTANT      000007FF           2047
+__PAGE_SHIFT                      CONSTANT      0000000B             11
+__PAGE_SIZE                       CONSTANT      00000800           2048
+__VECTOR_INT                      CONSTANT      00000004              4
+__VECTOR_RESET                    CONSTANT      00000000              0
+__WHILE_LOOP_COUNT_MAX            CONSTANT      000000FF            255
+___sdcc_saved_fsr                 STATIC        00000000              0
+__sdcc_interrupt                  ADDRESS       00000004              4
+gpasm-1.5.0 #1285 (Sep 12 2016) obj\Debug\tim   8-4-2020  19:47:27          PAGE 19
+
+
+SYMBOL TABLE
+  LABEL                              TYPE        VALUE         VALUE          VALUE
+                                                 (hex)         (dec)          (text)
+
+_c_interrupt_0020                 ADDRESS       00000020             32
+_c_interrupt_0025                 ADDRESS       00000025             37
+_c_interrupt_002E                 ADDRESS       0000002E             46
+_timer0_driver_init               GLOBAL        00000000              0
+_timer0_driver_start              GLOBAL        00000000              0
+_timer0_driver_update             GLOBAL        00000004              4
+_timer0_driver_update_counter_65536_18  STATIC        00000000              0
+
+Errors   :     0
+Warnings :     0 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+
